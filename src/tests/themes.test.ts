@@ -227,8 +227,8 @@ describe('Theme matching', () => {
 
 		let colorMap = new ColorMap();
 		const _NOT_SET = 0;
-		const _A = colorMap.getId('#100000');
-		const _B = colorMap.getId('#200000');
+		/* const _A = */ colorMap.getId('#100000');
+		/* const _B = */ colorMap.getId('#200000');
 		const _C = colorMap.getId('#400000');
 		const _D = colorMap.getId('#300000');
 
@@ -253,8 +253,8 @@ describe('Theme matching', () => {
 
 		let colorMap = new ColorMap();
 		const _NOT_SET = 0;
-		const _A = colorMap.getId('#100000');
-		const _B = colorMap.getId('#200000');
+		/* const _A = */ colorMap.getId('#100000');
+		/* const _B = */ colorMap.getId('#200000');
 		const _C = colorMap.getId('#500000');
 		const _D = colorMap.getId('#300000');
 		const _E = colorMap.getId('#400000');
@@ -303,8 +303,8 @@ describe('Theme matching', () => {
 
 		let colorMap = new ColorMap();
 		const _NOT_SET = 0;
-		const _A = colorMap.getId('#F8F8F2');
-		const _B = colorMap.getId('#272822');
+		/* const _A = */ colorMap.getId('#F8F8F2');
+		/* const _B = */ colorMap.getId('#272822');
 		const _C = colorMap.getId('#200000');
 		const _D = colorMap.getId('#300000');
 		const _E = colorMap.getId('#400000');
@@ -417,8 +417,8 @@ describe('Theme matching', () => {
 
 		let colorMap = new ColorMap();
 		const _NOT_SET = 0;
-		const _A = colorMap.getId('#aec2e0');
-		const _B = colorMap.getId('#14191f');
+		/* const _A = */ colorMap.getId('#aec2e0');
+		/* const _B = */ colorMap.getId('#14191f');
 		const _C = colorMap.getId('#FF410D');
 		const _D = colorMap.getId('#ffffff');
 

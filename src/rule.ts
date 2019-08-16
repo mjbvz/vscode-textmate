@@ -300,13 +300,11 @@ export class RegExpSourceList {
 	private _hasAnchors: boolean;
 	private _cached: ICompiledRule;
 	private _anchorCache: IRegExpSourceListAnchorCache;
-	private readonly _cachedSources: string[];
 
 	constructor() {
 		this._items = [];
 		this._hasAnchors = false;
 		this._cached = null;
-		this._cachedSources = null;
 		this._anchorCache = {
 			A0_G0: null,
 			A0_G1: null,

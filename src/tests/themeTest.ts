@@ -193,7 +193,6 @@ interface IDiffPageData {
 class SingleThemeTest {
 
 	public readonly themeName: string;
-	private readonly testName: string;
 	private readonly contents: string;
 	private readonly initialScopeName: string;
 	private readonly initialLanguage: number;
@@ -218,7 +217,6 @@ class SingleThemeTest {
 		expectedPatch: IExpectedTokenizationPatch[],
 	) {
 		this.themeName = themeName;
-		this.testName = testName;
 		this.contents = contents;
 		this.initialScopeName = initialScopeName;
 		this.initialLanguage = initialLanguage;

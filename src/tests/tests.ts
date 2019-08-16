@@ -170,7 +170,7 @@ describe('JSON', () => {
 	function isInvalid(json: string): void {
 		let hadErr = false;
 		try {
-			var actual = JSONparse(json, null, false);
+			JSONparse(json, null, false);
 		} catch (err) {
 			hadErr = true;
 		}
