@@ -3,6 +3,9 @@
 		"target": "ES5",
 		"module": "commonjs",
 		"outDir": "out",
+		"lib": [
+			"es5"
+		],
 		"noImplicitAny": true,
 		"noImplicitThis": true,
 		"noImplicitReturns": true,
