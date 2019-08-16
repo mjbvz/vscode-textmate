@@ -4,6 +4,8 @@
 		"module": "commonjs",
 		"outDir": "out",
 		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"noImplicitReturns": true,
 		"alwaysStrict": true,
 		"sourceMap": true,
 		"declaration": true

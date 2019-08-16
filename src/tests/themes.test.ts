@@ -103,7 +103,7 @@ export class Resolver implements RegistryOptions {
 		throw new Error('Could not findGrammarByLanguage for ' + language);
 	}
 
-	public getFilePath(scopeName: string): string {
+	public getFilePath(scopeName: string): string | undefined {
 		for (let i = 0; i < this._grammars.length; i++) {
 			let grammar = this._grammars[i];
 
@@ -112,6 +112,7 @@ export class Resolver implements RegistryOptions {
 			}
 		}
 		// console.warn('missing grammar for ' + scopeName);
+		return undefined;
 	}
 }
 

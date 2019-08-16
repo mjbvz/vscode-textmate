@@ -2,7 +2,7 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
 
-function doFail(streamState: JSONStreamState, msg: string): void {
+function doFail(streamState: JSONStreamState, msg: string): never {
 	// console.log('Near offset ' + streamState.pos + ': ' + msg + ' ~~~' + streamState.source.substr(streamState.pos, 50) + '~~~');
 	throw new Error('Near offset ' + streamState.pos + ': ' + msg + ' ~~~' + streamState.source.substr(streamState.pos, 50) + '~~~');
 }
@@ -408,7 +408,7 @@ function nextJSONToken(_state: JSONStreamState, _out: JSONToken): boolean {
 				case 'n': return '\n';
 				case 'r': return '\r';
 				case 't': return '\t';
-				default: doFail(_state, 'invalid escape sequence');
+				default: return doFail(_state, 'invalid escape sequence');
 			}
 		});
 

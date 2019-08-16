@@ -388,7 +388,7 @@ export class Grammar implements IGrammar, IRuleFactoryHelper {
 		return this._ruleId2desc[patternId];
 	}
 
-	public getExternalGrammar(scopeName: string, repository?: IRawRepository): IRawGrammar {
+	public getExternalGrammar(scopeName: string, repository?: IRawRepository): IRawGrammar | undefined {
 		if (this._includedGrammars[scopeName]) {
 			return this._includedGrammars[scopeName];
 		} else if (this._grammarRepository) {
@@ -399,6 +399,7 @@ export class Grammar implements IGrammar, IRuleFactoryHelper {
 				return this._includedGrammars[scopeName];
 			}
 		}
+		return undefined;
 	}
 
 	public tokenizeLine(lineText: string, prevState: StackElement): ITokenizeLineResult {
