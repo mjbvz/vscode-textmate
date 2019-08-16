@@ -91,7 +91,6 @@ export class ThemeTest {
 		for (let themeName in testFileExpected) {
 			this.tests.push(new SingleThemeTest(
 				themeName,
-				testFile,
 				testFileContents,
 				grammar.scopeName,
 				resolver.language2id[language],
@@ -208,7 +207,6 @@ class SingleThemeTest {
 
 	constructor(
 		themeName: string,
-		testName: string,
 		contents: string,
 		initialScopeName: string,
 		initialLanguage: number,

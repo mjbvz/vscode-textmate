@@ -37,7 +37,7 @@ function assertTokenizationSuite(testLocation: string): void {
 	tests.forEach((test) => {
 		it(test.desc, () => {
 			let locator: RegistryOptions = {
-				getFilePath: (scopeName: string) => null,
+				getFilePath: (_scopeName: string) => null,
 				getInjections: (scopeName: string) => {
 					if (scopeName === test.grammarScopeName) {
 						return test.grammarInjections;

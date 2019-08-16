@@ -8,8 +8,8 @@ import { Theme } from './theme';
 import { StackElement as StackElementImpl } from './grammar';
 
 let DEFAULT_OPTIONS: RegistryOptions = {
-	getFilePath: (scopeName: string) => null,
-	getInjections: (scopeName: string) => null
+	getFilePath: (_scopeName: string) => null,
+	getInjections: (_scopeName: string) => null
 };
 
 /**

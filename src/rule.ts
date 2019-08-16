@@ -66,11 +66,11 @@ export abstract class Rule {
 		return RegexSource.replaceCaptures(this._contentName, lineText, captureIndices);
 	}
 
-	public collectPatternsRecursive(grammar: IRuleRegistry, out: RegExpSourceList, isFirst: boolean) {
+	public collectPatternsRecursive(_grammar: IRuleRegistry, _out: RegExpSourceList, _isFirst: boolean) {
 		throw new Error('Implement me!');
 	}
 
-	public compile(grammar: IRuleRegistry, endRegexSource: string, allowA: boolean, allowG: boolean): ICompiledRule {
+	public compile(_grammar: IRuleRegistry, _endRegexSource: string, _allowA: boolean, _allowG: boolean): ICompiledRule {
 		throw new Error('Implement me!');
 	}
 }
@@ -185,7 +185,7 @@ export class RegExpSource {
 			return lineText.substring(capture.start, capture.end);
 		});
 		BACK_REFERENCING_END.lastIndex = 0;
-		return this.source.replace(BACK_REFERENCING_END, (match, g1) => {
+		return this.source.replace(BACK_REFERENCING_END, (_match, g1) => {
 			return escapeRegExpCharacters(capturedValues[parseInt(g1, 10)] || '');
 		});
 	}
@@ -339,7 +339,7 @@ export class RegExpSourceList {
 		}
 	}
 
-	public compile(grammar: IRuleRegistry, allowA: boolean, allowG: boolean): ICompiledRule {
+	public compile(_grammar: IRuleRegistry, allowA: boolean, allowG: boolean): ICompiledRule {
 		if (!this._hasAnchors) {
 			if (!this._cached) {
 				let regExps = this._items.map(e => e.source);
@@ -400,11 +400,11 @@ export class MatchRule extends Rule {
 		return `${this._match.source}`;
 	}
 
-	public collectPatternsRecursive(grammar: IRuleRegistry, out: RegExpSourceList, isFirst: boolean) {
+	public collectPatternsRecursive(_grammar: IRuleRegistry, out: RegExpSourceList, _isFirst: boolean) {
 		out.push(this._match);
 	}
 
-	public compile(grammar: IRuleRegistry, endRegexSource: string, allowA: boolean, allowG: boolean): ICompiledRule {
+	public compile(grammar: IRuleRegistry, _endRegexSource: string, allowA: boolean, allowG: boolean): ICompiledRule {
 		if (!this._cachedCompiledPatterns) {
 			this._cachedCompiledPatterns = new RegExpSourceList();
 			this.collectPatternsRecursive(grammar, this._cachedCompiledPatterns, true);
@@ -425,7 +425,7 @@ export class IncludeOnlyRule extends Rule {
 		this._cachedCompiledPatterns = null;
 	}
 
-	public collectPatternsRecursive(grammar: IRuleRegistry, out: RegExpSourceList, isFirst: boolean) {
+	public collectPatternsRecursive(grammar: IRuleRegistry, out: RegExpSourceList, _isFirst: boolean) {
 		let i: number,
 			len: number,
 			rule: Rule;
@@ -436,7 +436,7 @@ export class IncludeOnlyRule extends Rule {
 		}
 	}
 
-	public compile(grammar: IRuleRegistry, endRegexSource: string, allowA: boolean, allowG: boolean): ICompiledRule {
+	public compile(grammar: IRuleRegistry, _endRegexSource: string, allowA: boolean, allowG: boolean): ICompiledRule {
 		if (!this._cachedCompiledPatterns) {
 			this._cachedCompiledPatterns = new RegExpSourceList();
 			this.collectPatternsRecursive(grammar, this._cachedCompiledPatterns, true);
@@ -572,7 +572,7 @@ export class BeginWhileRule extends Rule {
 		}
 	}
 
-	public compile(grammar: IRuleRegistry, endRegexSource: string, allowA: boolean, allowG: boolean): ICompiledRule {
+	public compile(grammar: IRuleRegistry, _endRegexSource: string, allowA: boolean, allowG: boolean): ICompiledRule {
 		this._precompile(grammar);
 		return this._cachedCompiledPatterns.compile(grammar, allowA, allowG);
 	}
@@ -594,7 +594,7 @@ export class BeginWhileRule extends Rule {
 	}
 
 
-	private _precompileWhile(grammar: IRuleRegistry): void {
+	private _precompileWhile(_grammar: IRuleRegistry): void {
 		if (!this._cachedCompiledWhilePatterns) {
 			this._cachedCompiledWhilePatterns = new RegExpSourceList();
 			this._cachedCompiledWhilePatterns.push(this._while.hasBackReferences ? this._while.clone() : this._while);

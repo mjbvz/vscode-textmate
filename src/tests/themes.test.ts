@@ -165,7 +165,7 @@ class ThemeInfo {
 
 function assertThemeTest(test: ThemeTest, themeDatas: ThemeData[]): void {
 	(<any>it(test.testName, (done: (error?: any) => void) => {
-		test.evaluate(themeDatas, (err) => {
+		test.evaluate(themeDatas, () => {
 			test.writeDiffPage();
 			assert.ok(!test.hasDiff(), 'no more unpatched differences');
 			done();
