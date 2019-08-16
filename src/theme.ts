@@ -16,7 +16,7 @@ export class ParsedThemeRule {
 	_parsedThemeRuleBrand: void;
 
 	readonly scope: string;
-	readonly parentScopes: string[];
+	readonly parentScopes: string[] | null;
 	readonly index: number;
 
 	/**
@@ -28,7 +28,7 @@ export class ParsedThemeRule {
 
 	constructor(
 		scope: string,
-		parentScopes: string[],
+		parentScopes: string[] | null,
 		index: number,
 		fontStyle: number,
 		foreground: string,
@@ -124,12 +124,12 @@ export function parseTheme(source: IRawTheme): ParsedThemeRule[] {
 			}
 		}
 
-		let foreground: string = null;
+		let foreground: string | null = null;
 		if (typeof entry.settings.foreground === 'string' && isValidHexColor(entry.settings.foreground)) {
 			foreground = entry.settings.foreground;
 		}
 
-		let background: string = null;
+		let background: string | null = null;
 		if (typeof entry.settings.background === 'string' && isValidHexColor(entry.settings.background)) {
 			background = entry.settings.background;
 		}
@@ -140,7 +140,7 @@ export function parseTheme(source: IRawTheme): ParsedThemeRule[] {
 			let segments = _scope.split(' ');
 
 			let scope = segments[segments.length - 1];
-			let parentScopes: string[] = null;
+			let parentScopes: string[] | null = null;
 			if (segments.length > 1) {
 				parentScopes = segments.slice(0, segments.length - 1);
 				parentScopes.reverse();
@@ -332,7 +332,7 @@ export class ThemeTrieElementRule {
 		return new ThemeTrieElementRule(this.scopeDepth, this.parentScopes, this.fontStyle, this.foreground, this.background);
 	}
 
-	public static cloneArr(arr:ThemeTrieElementRule[]): ThemeTrieElementRule[] {
+	public static cloneArr(arr: ThemeTrieElementRule[]): ThemeTrieElementRule[] {
 		let r: ThemeTrieElementRule[] = [];
 		for (let i = 0, len = arr.length; i < len; i++) {
 			r[i] = arr[i].clone();

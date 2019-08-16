@@ -31,7 +31,7 @@ class AsyncGrammarReader {
 		this._parser = parser;
 	}
 
-	public load(callback: (error: any, grammar: IRawGrammar) => void): void {
+	public load(callback: (error: any, grammar: IRawGrammar | null) => void): void {
 		fs.readFile(this._filePath, (err, contents) => {
 			if (err) {
 				callback(err, null);

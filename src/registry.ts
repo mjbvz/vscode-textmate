@@ -83,7 +83,7 @@ export class SyncRegistry implements IGrammarRepository {
 	/**
 	 * Lookup a grammar.
 	 */
-	public grammarForScopeName(scopeName: string, initialLanguage: number, embeddedLanguages: IEmbeddedLanguagesMap, tokenTypes: ITokenTypeMap): IGrammar {
+	public grammarForScopeName(scopeName: string, initialLanguage: number, embeddedLanguages: IEmbeddedLanguagesMap, tokenTypes: ITokenTypeMap): IGrammar | null {
 		if (!this._grammars[scopeName]) {
 			let rawGrammar = this._rawGrammars[scopeName];
 			if (!rawGrammar) {

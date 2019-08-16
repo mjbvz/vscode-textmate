@@ -34,12 +34,12 @@ export abstract class Rule {
 	public readonly id: number;
 
 	private readonly _nameIsCapturing: boolean;
-	private readonly _name: string;
+	private readonly _name: string | null;
 
 	private readonly _contentNameIsCapturing: boolean;
-	private readonly _contentName: string;
+	private readonly _contentName: string | null;
 
-	constructor($location: ILocation, id: number, name: string, contentName: string) {
+	constructor($location: ILocation, id: number, name: string, contentName: string | null) {
 		this.$location = $location;
 		this.id = id;
 		this._name = name || null;
@@ -262,10 +262,10 @@ export class RegExpSource {
 }
 
 interface IRegExpSourceListAnchorCache {
-	A0_G0: ICompiledRule;
-	A0_G1: ICompiledRule;
-	A1_G0: ICompiledRule;
-	A1_G1: ICompiledRule;
+	A0_G0: ICompiledRule | null;
+	A0_G1: ICompiledRule | null;
+	A1_G0: ICompiledRule | null;
+	A1_G1: ICompiledRule | null;
 }
 
 let getOnigModule = (function () {
@@ -298,7 +298,7 @@ export class RegExpSourceList {
 
 	private readonly _items: RegExpSource[];
 	private _hasAnchors: boolean;
-	private _cached: ICompiledRule;
+	private _cached: ICompiledRule | null;
 	private _anchorCache: IRegExpSourceListAnchorCache;
 
 	constructor() {
@@ -339,7 +339,7 @@ export class RegExpSourceList {
 		}
 	}
 
-	public compile(_grammar: IRuleRegistry, allowA: boolean, allowG: boolean): ICompiledRule {
+	public compile(_grammar: IRuleRegistry, allowA: boolean, allowG: boolean): ICompiledRule | null {
 		if (!this._hasAnchors) {
 			if (!this._cached) {
 				let regExps = this._items.map(e => e.source);
@@ -387,7 +387,7 @@ export class RegExpSourceList {
 export class MatchRule extends Rule {
 	private readonly _match: RegExpSource;
 	public readonly captures: CaptureRule[];
-	private _cachedCompiledPatterns: RegExpSourceList;
+	private _cachedCompiledPatterns: RegExpSourceList | null;
 
 	constructor($location: ILocation, id: number, name: string, match: string, captures: CaptureRule[]) {
 		super($location, id, name, null);
@@ -416,7 +416,7 @@ export class MatchRule extends Rule {
 export class IncludeOnlyRule extends Rule {
 	public readonly hasMissingPatterns: boolean;
 	public readonly patterns: number[];
-	private _cachedCompiledPatterns: RegExpSourceList;
+	private _cachedCompiledPatterns: RegExpSourceList | null;
 
 	constructor($location: ILocation, id: number, name: string, contentName: string, patterns: ICompilePatternsResult) {
 		super($location, id, name, contentName);
@@ -458,7 +458,7 @@ export class BeginEndRule extends Rule {
 	public readonly applyEndPatternLast: boolean;
 	public readonly hasMissingPatterns: boolean;
 	public readonly patterns: number[];
-	private _cachedCompiledPatterns: RegExpSourceList;
+	private _cachedCompiledPatterns: RegExpSourceList | null;
 
 	constructor($location: ILocation, id: number, name: string, contentName: string, begin: string, beginCaptures: CaptureRule[], end: string, endCaptures: CaptureRule[], applyEndPatternLast: boolean, patterns: ICompilePatternsResult) {
 		super($location, id, name, contentName);
@@ -537,8 +537,8 @@ export class BeginWhileRule extends Rule {
 	public readonly whileHasBackReferences: boolean;
 	public readonly hasMissingPatterns: boolean;
 	public readonly patterns: number[];
-	private _cachedCompiledPatterns: RegExpSourceList;
-	private _cachedCompiledWhilePatterns: RegExpSourceList;
+	private _cachedCompiledPatterns: RegExpSourceList | null;
+	private _cachedCompiledWhilePatterns: RegExpSourceList | null;
 
 	constructor($location: ILocation, id: number, name: string, contentName: string, begin: string, beginCaptures: CaptureRule[], _while: string, whileCaptures: CaptureRule[], patterns: ICompilePatternsResult) {
 		super($location, id, name, contentName);
@@ -736,8 +736,8 @@ export class RuleFactory {
 						// Special include also found in `repository`
 						patternId = RuleFactory.getCompiledRuleId(repository[pattern.include], helper, repository);
 					} else {
-						let externalGrammarName: string = null,
-							externalGrammarInclude: string = null,
+						let externalGrammarName: string | null = null,
+							externalGrammarInclude: string | null = null,
 							sharpIndex = pattern.include.indexOf('#');
 						if (sharpIndex >= 0) {
 							externalGrammarName = pattern.include.substring(0, sharpIndex);

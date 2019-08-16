@@ -25,7 +25,7 @@ export function tokenizeWithTheme(theme: IRawTheme, colorMap: string[], fileCont
 
 	let lines = fileContents.split(/\r\n|\r|\n/);
 
-	let ruleStack: StackElement = null;
+	let ruleStack: StackElement | null = null;
 	let actual: IThemedToken[] = [], actualLen = 0;
 
 	for (let i = 0, len = lines.length; i < len; i++) {

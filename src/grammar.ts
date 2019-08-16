@@ -156,9 +156,9 @@ export class ScopeMetadata {
 	public readonly scopeName: string;
 	public readonly languageId: number;
 	public readonly tokenType: TemporaryStandardTokenType;
-	public readonly themeData: ThemeTrieElementRule[];
+	public readonly themeData: ThemeTrieElementRule[] | null;
 
-	constructor(scopeName: string, languageId: number, tokenType: TemporaryStandardTokenType, themeData: ThemeTrieElementRule[]) {
+	constructor(scopeName: string, languageId: number, tokenType: TemporaryStandardTokenType, themeData: ThemeTrieElementRule[] | null) {
 		this.scopeName = scopeName;
 		this.languageId = languageId;
 		this.tokenType = tokenType;
@@ -173,7 +173,7 @@ class ScopeMetadataProvider {
 	private _cache: { [scopeName: string]: ScopeMetadata; };
 	private _defaultMetaData: ScopeMetadata;
 	private readonly _embeddedLanguages: IEmbeddedLanguagesMap;
-	private readonly _embeddedLanguagesRegex: RegExp;
+	private readonly _embeddedLanguagesRegex: RegExp | null;
 
 	constructor(initialLanguage: number, themeProvider: IThemeProvider, embeddedLanguages: IEmbeddedLanguagesMap) {
 		this._initialLanguage = initialLanguage;
@@ -976,11 +976,11 @@ export class StackElementMetadata {
 export class ScopeListElement {
 	_scopeListElementBrand: void;
 
-	public readonly parent: ScopeListElement;
+	public readonly parent: ScopeListElement | null;
 	public readonly scope: string;
 	public readonly metadata: number;
 
-	constructor(parent: ScopeListElement, scope: string, metadata: number) {
+	constructor(parent: ScopeListElement | null, scope: string, metadata: number) {
 		this.parent = parent;
 		this.scope = scope;
 		this.metadata = metadata;
@@ -1125,9 +1125,9 @@ export class StackElement implements StackElementDef {
 	private _enterPos: number;
 
 	/**
-	 * The previous state on the stack (or null for the root state).
+	 * The previous state on the stack (or `null` for the root state).
 	 */
-	public readonly parent: StackElement;
+	public readonly parent: StackElement | null;
 	/**
 	 * The depth of the stack.
 	 */
@@ -1140,18 +1140,18 @@ export class StackElement implements StackElementDef {
 	/**
 	 * The "pop" (end) condition for this state in case that it was dynamically generated through captured text.
 	 */
-	public readonly endRule: string;
+	public readonly endRule: string | null;
 	/**
 	 * The list of scopes containing the "name" for this state.
 	 */
-	public readonly nameScopesList: ScopeListElement;
+	public readonly nameScopesList: ScopeListElement | null;
 	/**
 	 * The list of scopes containing the "contentName" (besides "name") for this state.
 	 * This list **must** contain as an element `scopeName`.
 	 */
-	public readonly contentNameScopesList: ScopeListElement;
+	public readonly contentNameScopesList: ScopeListElement | null;
 
-	constructor(parent: StackElement, ruleId: number, enterPos: number, endRule: string, nameScopesList: ScopeListElement, contentNameScopesList: ScopeListElement) {
+	constructor(parent: StackElement | null, ruleId: number, enterPos: number, endRule: string | null, nameScopesList: ScopeListElement | null, contentNameScopesList: ScopeListElement | null) {
 		this.parent = parent;
 		this.depth = (this.parent ? this.parent.depth + 1 : 1);
 		this.ruleId = ruleId;

@@ -202,7 +202,7 @@ export interface IGrammar {
 	/**
 	 * Tokenize `lineText` using previous line state `prevState`.
 	 */
-	tokenizeLine(lineText: string, prevState: StackElement): ITokenizeLineResult;
+	tokenizeLine(lineText: string, prevState: StackElement | null): ITokenizeLineResult;
 
 	/**
 	 * Tokenize `lineText` using previous line state `prevState`.
@@ -214,7 +214,7 @@ export interface IGrammar {
 	 *  - background color
 	 * e.g. for getting the languageId: `(metadata & MetadataConsts.LANGUAGEID_MASK) >>> MetadataConsts.LANGUAGEID_OFFSET`
 	 */
-	tokenizeLine2(lineText: string, prevState: StackElement): ITokenizeLineResult2;
+	tokenizeLine2(lineText: string, prevState: StackElement | null): ITokenizeLineResult2;
 }
 
 export interface ITokenizeLineResult {
