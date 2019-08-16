@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-'use strict';
 
 import { IGrammar, StackElement, IRawTheme, IRawThemeSetting } from '../main';
 import { StackElementMetadata } from '../grammar';

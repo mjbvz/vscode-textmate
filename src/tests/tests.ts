@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-'use strict';
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -89,7 +88,7 @@ function assertTokenizationSuite(testLocation: string): void {
 				return (token.value.length > 0);
 			});
 		}
-		
+
 		assert.deepEqual(actualTokens, testCase.tokens, 'Tokenizing line ' + testCase.line);
 
 		return actual.ruleStack;
